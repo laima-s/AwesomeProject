@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -6,36 +7,29 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import PeopleScreen from './app/components/PeopleScreen';
 import PlanetsScreen from './app/components/PlanetsScreen';
 import SpaceshipsScreen from './app/components/SpaceshipsScreen';
-import { enableScreens } from 'react-native-screens';
-
-// Enable screens for better performance
-enableScreens();
-
-const queryClient = new QueryClient();
 
 const Tab = createBottomTabNavigator();
-
-if (__DEV__) {
-  require("./ReactotronConfig");
-}
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer
-      theme={{
-        ...DefaultTheme,
-        colors: {
-          ...DefaultTheme.colors,
-          background: 'black',
-          text: 'white',
-        },
-      }}
-    >
+        theme={{
+          ...DefaultTheme,
+          colors: {
+            ...DefaultTheme.colors,
+            background: 'black',
+            text: 'white',
+          },
+        }}
+      >
+        <StatusBar barStyle="light-content" backgroundColor="black" />
         <Tab.Navigator
           screenOptions={({ route }) => ({
             tabBarIcon: ({ color, size }) => {
               let iconName: string;
+
               if (route.name === 'People') {
                 iconName = 'ios-people';
               } else if (route.name === 'Planets') {
@@ -58,7 +52,6 @@ const App = () => {
             },
             headerTintColor: 'white',
             headerTitleStyle: {
-              fontWeight: 'bold',
               color: 'white',
             },
           })}

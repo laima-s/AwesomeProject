@@ -11,13 +11,17 @@ const renderItem = ({ item }: { item: Planet }) => (
   </View>
 );
 
-const PlanetsScreen = () => (
-  <DataScreen
-    endpoint="planets"
-    renderItem={renderItem}
-    backgroundImage={require('../assets/images/starwars-background.jpg')}
-  />
-);
+const PlanetsScreen = () => {
+  
+
+  return (
+    <DataScreen
+      endpoint="planets"
+      renderItem={renderItem}
+      backgroundImage={require('../assets/images/starwars-background.jpg')}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   item: {
@@ -25,15 +29,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     padding: 20,
     color: 'yellow',
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
   details: {
     fontFamily: 'Starjhol',
     fontSize: 18,
-    padding: 5,
     color: 'yellow',
-    textAlign: 'center',
   },
 });
 

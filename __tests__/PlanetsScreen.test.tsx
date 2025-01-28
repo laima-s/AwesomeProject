@@ -6,51 +6,51 @@ import useFetch from '../app/hooks/useFetch';
 jest.mock('../app/hooks/useFetch');
 
 describe('PlanetsScreen', () => {
-    it('renders loading state correctly', () => {
-        (useFetch as jest.Mock).mockReturnValue({
-            data: null,
-            isLoading: true,
-            error: null,
-        });
-
-        render(<PlanetsScreen />);
-
-        expect(screen.getByText('Loading...')).toBeTruthy();
-        expect(screen.getByTestId('ActivityIndicator')).toBeTruthy();
+  it('renders loading state correctly', () => {
+    (useFetch as jest.Mock).mockReturnValue({
+      data: null,
+      isLoading: true,
+      error: null,
     });
 
-    it('renders error state correctly', () => {
-        (useFetch as jest.Mock).mockReturnValue({
-            data: null,
-            isLoading: false,
-            error: { message: 'Failed to fetch' },
-        });
+    render(<PlanetsScreen />);
 
-        render(<PlanetsScreen />);
+    expect(screen.getByText('Loading...')).toBeTruthy();
+    expect(screen.getByTestId('ActivityIndicator')).toBeTruthy();
+  });
 
-        expect(screen.getByText('Error: Failed to fetch')).toBeTruthy();
+  it('renders error state correctly', () => {
+    (useFetch as jest.Mock).mockReturnValue({
+      data: null,
+      isLoading: false,
+      error: { message: 'Failed to fetch data' },
     });
 
-    it('renders planets list correctly', () => {
-        (useFetch as jest.Mock).mockReturnValue({
-            data: {
-                results: [
-                    { name: 'Tatooine', climate: 'arid', terrain: 'desert' },
-                    { name: 'Alderaan', climate: 'temperate', terrain: 'grasslands, mountains' },
-                ],
-            },
-            isLoading: false,
-            error: null,
-        });
+    render(<PlanetsScreen />);
 
-        render(<PlanetsScreen />);
+    expect(screen.getByText('Error: Failed to fetch data')).toBeTruthy();
+  });
 
-        expect(screen.getByText('Tatooine')).toBeTruthy();
-        expect(screen.getByText('Climate: arid')).toBeTruthy();
-        expect(screen.getByText('Terrain: desert')).toBeTruthy();
-
-        expect(screen.getByText('Alderaan')).toBeTruthy();
-        expect(screen.getByText('Climate: temperate')).toBeTruthy();
-        expect(screen.getByText('Terrain: grasslands, mountains')).toBeTruthy();
+  it('renders planets correctly', () => {
+    (useFetch as jest.Mock).mockReturnValue({
+      data: {
+        results: [
+          { name: 'Tatooine', climate: 'arid', population: '200000' },
+          { name: 'Alderaan', climate: 'temperate', population: '2000000000' },
+        ],
+      },
+      isLoading: false,
+      error: null,
     });
+
+    render(<PlanetsScreen />);
+
+    expect(screen.getByText('Tatooine')).toBeTruthy();
+    expect(screen.getByText('Climate: arid')).toBeTruthy();
+    expect(screen.getByText('Population: 200000')).toBeTruthy();
+
+    expect(screen.getByText('Alderaan')).toBeTruthy();
+    expect(screen.getByText('Climate: temperate')).toBeTruthy();
+    expect(screen.getByText('Population: 2000000000')).toBeTruthy();
+  });
 });

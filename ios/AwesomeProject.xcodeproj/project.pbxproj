@@ -15,6 +15,8 @@
 		7699B88040F8A987B510C191 /* libPods-AwesomeProject-AwesomeProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-AwesomeProject-AwesomeProjectTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		DB836CDC3189B20745E5805B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
+		90EB3E15F6594686AA28FC64 /* Starjhol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C5AF4185C4B415B92FE6E4E /* Starjhol.ttf */; };
+		4295DFBBFF9046D9B43FC99D /* Starjout.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA2A4E98066B4BED8AD45951 /* Starjout.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = AwesomeProject/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-AwesomeProject-AwesomeProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject-AwesomeProjectTests.release.xcconfig"; path = "Target Support Files/Pods-AwesomeProject-AwesomeProjectTests/Pods-AwesomeProject-AwesomeProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		1C5AF4185C4B415B92FE6E4E /* Starjhol.ttf */ = {isa = PBXFileReference; name = "Starjhol.ttf"; path = "../app/assets/fonts/Starjhol.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AA2A4E98066B4BED8AD45951 /* Starjout.ttf */ = {isa = PBXFileReference; name = "Starjout.ttf"; path = "../app/assets/fonts/Starjout.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +129,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				53F1FFCE54034E598CC29F44 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -150,6 +155,16 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		53F1FFCE54034E598CC29F44 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				1C5AF4185C4B415B92FE6E4E /* Starjhol.ttf */,
+				AA2A4E98066B4BED8AD45951 /* Starjout.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -247,6 +262,8 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				DB836CDC3189B20745E5805B /* PrivacyInfo.xcprivacy in Resources */,
+				90EB3E15F6594686AA28FC64 /* Starjhol.ttf in Resources */,
+				4295DFBBFF9046D9B43FC99D /* Starjout.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "app/assets/fonts/Starjhol.ttf",
+      "sha1": "78c1b5f071e445c3dda1f6ccc125e443f4b9fe4e"
+    },
+    {
+      "path": "app/assets/fonts/Starjout.ttf",
+      "sha1": "ac7df750a43f49207aa2ed6d0a300026ab797539"
+    }
+  ]
+}
