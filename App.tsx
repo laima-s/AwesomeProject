@@ -62,7 +62,6 @@ const App = () => {
           <Tab.Screen name="People" component={PeopleScreen} />
           <Tab.Screen name="Planets" component={PlanetsScreen} />
           <Tab.Screen name="Spaceships" component={SpaceshipsScreen} />
-          <Tab.Screen name="MyComponent" component={MyComponent} /> {/* Add MyComponent to the Tab Navigator */}
         </Tab.Navigator>
       </NavigationContainer>
     </QueryClientProvider>
