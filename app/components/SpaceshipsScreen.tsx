@@ -11,13 +11,15 @@ const renderItem = ({ item }: { item: Spaceship }) => (
   </View>
 );
 
-const SpaceshipsScreen = () => (
-  <DataScreen
-    endpoint="starships"
-    renderItem={renderItem}
-    backgroundImage={require('../assets/images/starwars-background.jpg')}
-  />
-);
+const SpaceshipsScreen = () => {
+  return (
+    <DataScreen
+      endpoint="spaceships"
+      renderItem={renderItem}
+      backgroundImage={require('../assets/images/starwars-background.jpg')}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   item: {

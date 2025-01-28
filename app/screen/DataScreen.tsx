@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, ActivityIndicator, TextInput, ImageBackground, ImageSourcePropType } from 'react-native';
-import * as Font from 'expo-font';
 import useFetch from '../hooks/useFetch';
 import { Person, Spaceship, Planet } from '../types';
 
@@ -13,23 +12,6 @@ interface DataScreenProps<T> {
 const DataScreen = <T extends Person | Spaceship | Planet>({ endpoint, renderItem, backgroundImage }: DataScreenProps<T>) => {
   const { data, isLoading, error } = useFetch<T>(endpoint);
   const [searchQuery, setSearchQuery] = useState('');
-  const [fontsLoaded, setFontsLoaded] = useState(false);
-
-  useEffect(() => {
-    const loadFonts = async () => {
-      await Font.loadAsync({
-        Starjhol: require('../assets/fonts/Starjhol.ttf'),
-        Starjout: require('../assets/fonts/Starjout.ttf'),
-      });
-      setFontsLoaded(true);
-    };
-
-    loadFonts();
-  }, []);
-
-  if (!fontsLoaded) {
-    return <ActivityIndicator size="large" color="yellow" />;
-  }
 
   if (isLoading) {
     return (

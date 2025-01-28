@@ -24,12 +24,22 @@ describe('SpaceshipsScreen', () => {
             expect.objectContaining({
                 endpoint: 'spaceships',
                 renderItem: expect.any(Function),
-                backgroundImage: expect.any(Number),
-            }),
-            {}
+                backgroundImage: expect.any(Number), // Assuming backgroundImage is a require statement
+            })
         );
         expect(mockRenderItem).toHaveBeenCalledWith({
             item: { name: 'X-Wing', model: 'T-65', manufacturer: 'Incom Corporation' },
         });
+    });
+
+    it('renders spaceship items correctly', () => {
+        const mockRenderItem = jest.fn();
+        (DataScreen as jest.Mock).mockImplementation(({ renderItem }) => {
+            renderItem({ item: { name: 'X-Wing', model: 'T-65', manufacturer: 'Incom Corporation' } });
+            return null;
+        });
+
+        const { getByText } = render(<SpaceshipsScreen />);
+        expect(getByText('X-Wing')).toBeTruthy();
     });
 });

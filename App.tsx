@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -6,7 +7,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import PeopleScreen from './app/components/PeopleScreen';
 import PlanetsScreen from './app/components/PlanetsScreen';
 import SpaceshipsScreen from './app/components/SpaceshipsScreen';
-import MyComponent from './app/components/MyComponent';
 
 const Tab = createBottomTabNavigator();
 const queryClient = new QueryClient();
@@ -24,6 +24,8 @@ const App = () => {
           },
         }}
       >
+        <StatusBar barStyle="light-content" backgroundColor="black" />
+
         <Tab.Navigator
           screenOptions={({ route }) => ({
             tabBarIcon: ({ color, size }) => {
