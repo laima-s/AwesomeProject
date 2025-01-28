@@ -25,6 +25,7 @@ const App = () => {
         }}
       >
         <StatusBar barStyle="light-content" backgroundColor="black" />
+
         <Tab.Navigator
           screenOptions={({ route }) => ({
             tabBarIcon: ({ color, size }) => {
@@ -36,8 +37,10 @@ const App = () => {
                 iconName = 'ios-planet';
               } else if (route.name === 'Spaceships') {
                 iconName = 'ios-rocket';
+              } else if (route.name === 'MyComponent') {
+                iconName = 'ios-information-circle';
               } else {
-                iconName = 'ios-alert'; // Default icon if none match
+                iconName = 'ios-alert';
               }
 
               return <Ionicons name={iconName} size={size} color={color} />;
@@ -59,6 +62,7 @@ const App = () => {
           <Tab.Screen name="People" component={PeopleScreen} />
           <Tab.Screen name="Planets" component={PlanetsScreen} />
           <Tab.Screen name="Spaceships" component={SpaceshipsScreen} />
+          <Tab.Screen name="MyComponent" component={MyComponent} /> {/* Add MyComponent to the Tab Navigator */}
         </Tab.Navigator>
       </NavigationContainer>
     </QueryClientProvider>
