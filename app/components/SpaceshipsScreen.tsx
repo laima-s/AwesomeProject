@@ -4,10 +4,10 @@ import DataScreen from '../screen/DataScreen';
 import { Spaceship } from '../types';
 
 const renderItem = ({ item }: { item: Spaceship }) => (
-  <View>
-    <Text style={styles.item}>{item.name}</Text>
-    <Text style={styles.details}>Model: {item.model}</Text>
-    <Text style={styles.details}>Manufacturer: {item.manufacturer}</Text>
+  <View style={styles.itemContainer}>
+    <Text style={styles.itemName}>{item.name}</Text>
+    <Text style={styles.itemDetail}>Model: <Text style={styles.itemDetailValue}>{item.model}</Text></Text>
+    <Text style={styles.itemDetail}>Manufacturer: <Text style={styles.itemDetailValue}>{item.manufacturer}</Text></Text>
   </View>
 );
 
@@ -22,20 +22,32 @@ const SpaceshipsScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  item: {
+  itemContainer: {
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    padding: 15,
+    marginVertical: 8,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'yellow',
+  },
+  itemName: {
     fontFamily: 'Starjout',
     fontSize: 24,
-    padding: 20,
     color: 'yellow',
     fontWeight: 'bold',
     textAlign: 'center',
+    marginBottom: 10,
   },
-  details: {
+  itemDetail: {
     fontFamily: 'Starjhol',
     fontSize: 18,
-    padding: 5,
     color: 'yellow',
     textAlign: 'center',
+  },
+  itemDetailValue: {
+    fontFamily: 'Starjhol',
+    fontSize: 18,
+    color: 'white',
   },
 });
 

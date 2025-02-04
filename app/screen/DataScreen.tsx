@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet, ActivityIndicator, TextInput, ImageBackground, ImageSourcePropType } from 'react-native';
 import useFetch from '../hooks/useFetch';
 import { Person, Spaceship, Planet } from '../types';
@@ -53,6 +53,8 @@ const DataScreen = <T extends Person | Spaceship | Planet>({ endpoint, renderIte
             </View>
           )}
           keyExtractor={(item) => item.name}
+          showsVerticalScrollIndicator={true}
+          contentContainerStyle={styles.flatListContent}
         />
       </View>
     </ImageBackground>
@@ -93,6 +95,9 @@ const styles = StyleSheet.create({
     color: 'yellow',
     backgroundColor: 'transparent',
     textAlign: 'center',
+  },
+  flatListContent: {
+    flexGrow: 1,
   },
   itemContainer: {
     marginBottom: 16,
