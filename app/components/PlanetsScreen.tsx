@@ -1,15 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import DataScreen from '../screen/DataScreen';
 import { Planet } from '../types';
 
-const renderItem = ({ item }: { item: Planet }) => (
-  <View style={styles.itemContainer}>
-    <Text style={styles.itemName}>{item.name}</Text>
-    <Text style={styles.itemDetail}>Climate: <Text style={styles.itemDetailValue}>{item.climate}</Text></Text>
-    <Text style={styles.itemDetail}>Population: <Text style={styles.itemDetailValue}>{item.population}</Text></Text>
-  </View>
-);
+const renderItem = ({ item }: { item: Planet }) => {
+  const handlePress = () => {
+    const url = `https://starwars.fandom.com/wiki/${item.name.replace(' ', '_')}`;
+    Linking.openURL(url);
+  };
+
+  return (
+    <TouchableOpacity onPress={handlePress} style={styles.itemContainer}>
+      <Text style={styles.itemName}>{item.name}</Text>
+      <Text style={styles.itemDetail}>Climate: <Text style={styles.itemDetailValue}>{item.climate}</Text></Text>
+      <Text style={styles.itemDetail}>Population: <Text style={styles.itemDetailValue}>{item.population}</Text></Text>
+    </TouchableOpacity>
+  );
+};
 
 const PlanetsScreen = () => {
   return (
