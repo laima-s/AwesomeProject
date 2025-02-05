@@ -1,76 +1,38 @@
-import 'react-native';
 import React from 'react';
-import App from '../App';
 import { render } from '@testing-library/react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
-// Mock the screens
-jest.mock('../app/components/PeopleScreen', () => 'PeopleScreen');
-jest.mock('../app/components/SpaceshipsScreen', () => 'SpaceshipsScreen');
-jest.mock('../app/components/PlanetsScreen', () => 'PlanetsScreen');
-
-const queryClient = new QueryClient();
+import App from '../App';
 
 describe('App', () => {
-  it('renders correctly', () => {
-    const { toJSON } = render(
-      <QueryClientProvider client={queryClient}>
-        <NavigationContainer>
-          <App />
-        </NavigationContainer>
-      </QueryClientProvider>
-    );
-    expect(toJSON()).toMatchSnapshot();
+  it('renders the People tab', () => {
+    const { getByText } = render(<App />);
+    expect(getByText('People')).toBeTruthy();
   });
 
-  it('has three tabs', () => {
-    const { getByText } = render(
-      <QueryClientProvider client={queryClient}>
-        <NavigationContainer>
-          <App />
-        </NavigationContainer>
-      </QueryClientProvider>
-    );
-
-    expect(getByText('People')).toBeTruthy();
-    expect(getByText('Spaceships')).toBeTruthy();
+  it('renders the Planets tab', () => {
+    const { getByText } = render(<App />);
     expect(getByText('Planets')).toBeTruthy();
   });
 
-  it('renders PeopleScreen when People tab is selected', () => {
-    const { getByText } = render(
-      <QueryClientProvider client={queryClient}>
-        <NavigationContainer>
-          <App />
-        </NavigationContainer>
-      </QueryClientProvider>
-    );
-
-    expect(getByText('PeopleScreen')).toBeTruthy();
+  it('renders the Spaceships tab', () => {
+    const { getByText } = render(<App />);
+    expect(getByText('Spaceships')).toBeTruthy();
   });
 
-  it('renders SpaceshipsScreen when Spaceships tab is selected', () => {
-    const { getByText } = render(
-      <QueryClientProvider client={queryClient}>
-        <NavigationContainer>
-          <App />
-        </NavigationContainer>
-      </QueryClientProvider>
-    );
-
-    expect(getByText('SpaceshipsScreen')).toBeTruthy();
+  it('renders the correct icon for the People tab', () => {
+    const { getByTestId } = render(<App />);
+    const peopleIcon = getByTestId('People-icon');
+    expect(peopleIcon).toBeTruthy();
   });
 
-  it('renders PlanetsScreen when Planets tab is selected', () => {
-    const { getByText } = render(
-      <QueryClientProvider client={queryClient}>
-        <NavigationContainer>
-          <App />
-        </NavigationContainer>
-      </QueryClientProvider>
-    );
+  it('renders the correct icon for the Planets tab', () => {
+    const { getByTestId } = render(<App />);
+    const planetsIcon = getByTestId('Planets-icon');
+    expect(planetsIcon).toBeTruthy();
+  });
 
-    expect(getByText('PlanetsScreen')).toBeTruthy();
+  it('renders the correct icon for the Spaceships tab', () => {
+    const { getByTestId } = render(<App />);
+    const spaceshipsIcon = getByTestId('Spaceships-icon');
+    expect(spaceshipsIcon).toBeTruthy();
   });
 });

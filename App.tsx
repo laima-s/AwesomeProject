@@ -1,8 +1,7 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { Image, StatusBar } from 'react-native';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import PeopleScreen from './app/components/PeopleScreen';
 import PlanetsScreen from './app/components/PlanetsScreen';
@@ -20,7 +19,7 @@ const App = () => {
           colors: {
             ...DefaultTheme.colors,
             background: 'black',
-            text: 'white',
+            text: 'yellow',
           },
         }}
       >
@@ -29,21 +28,21 @@ const App = () => {
         <Tab.Navigator
           screenOptions={({ route }) => ({
             tabBarIcon: ({ color, size }) => {
-              let iconName: string;
+              let iconSource: any;
+              let testID: string;
 
               if (route.name === 'People') {
-                iconName = 'ios-people';
+                iconSource = require('./app/assets/images/people-icon.png');
+                testID = 'People-icon';
               } else if (route.name === 'Planets') {
-                iconName = 'ios-planet';
+                iconSource = require('./app/assets/images/planet_icon.png');
+                testID = 'Planets-icon';
               } else if (route.name === 'Spaceships') {
-                iconName = 'ios-rocket';
-              } else if (route.name === 'MyComponent') {
-                iconName = 'ios-information-circle';
-              } else {
-                iconName = 'ios-alert';
+                iconSource = require('./app/assets/images/spaceship_icon.png');
+                testID = 'Spaceships-icon';
               }
-
-              return <Ionicons name={iconName} size={size} color={color} />;
+              
+              return <Image source={iconSource} style={{ width: size, height: size, tintColor: color }} testID={testID} />;
             },
             tabBarActiveTintColor: 'white',
             tabBarInactiveTintColor: 'gray',
@@ -55,7 +54,7 @@ const App = () => {
             },
             headerTintColor: 'white',
             headerTitleStyle: {
-              color: 'white',
+              color: 'yellow',
             },
           })}
         >

@@ -1,11 +1,9 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react-native';
+import { render, screen, fireEvent } from '@testing-library/react-native';
 import PeopleScreen from '../app/components/PeopleScreen';
-import DataScreen from '../app/screen/DataScreen';
 import useFetch from '../app/hooks/useFetch';
 
 jest.mock('../app/hooks/useFetch');
-jest.mock('../app/screen/DataScreen', () => jest.fn());
 
 describe('PeopleScreen', () => {
     it('renders loading state correctly', () => {
@@ -34,13 +32,15 @@ describe('PeopleScreen', () => {
     });
 
     it('renders people correctly', () => {
+        const mockData = {
+            results: [
+                { name: 'Luke Skywalker', height: '172', mass: '77' },
+                { name: 'Darth Vader', height: '202', mass: '136' },
+            ],
+        };
+
         (useFetch as jest.Mock).mockReturnValue({
-            data: {
-                results: [
-                    { name: 'Luke Skywalker', height: '172', mass: '77' },
-                    { name: 'Darth Vader', height: '202', mass: '136' },
-                ],
-            },
+            data: mockData,
             isLoading: false,
             error: null,
         });
@@ -56,20 +56,26 @@ describe('PeopleScreen', () => {
         expect(screen.getByText('Mass: 136')).toBeTruthy();
     });
 
-    it('passes the correct props to DataScreen', () => {
-        const mockRenderItem = jest.fn();
-        (DataScreen as jest.Mock).mockImplementation(({ renderItem }) => {
-            renderItem({ item: { name: 'Luke Skywalker', height: '172', mass: '77' } });
-            return null;
+    it('filters data based on search query', () => {
+        const mockData = {
+            results: [
+                { name: 'Luke Skywalker', height: '172', mass: '77' },
+                { name: 'Darth Vader', height: '202', mass: '136' },
+            ],
+        };
+
+        (useFetch as jest.Mock).mockReturnValue({
+            data: mockData,
+            isLoading: false,
+            error: null,
         });
 
         render(<PeopleScreen />);
-        expect(DataScreen).toHaveBeenCalledWith(
-            expect.objectContaining({
-                endpoint: 'people',
-                renderItem: expect.any(Function),
-                backgroundImage: expect.any(Number), // Assuming backgroundImage is a require statement
-            })
-        );
+
+        const searchInput = screen.getByPlaceholderText('Search...');
+        fireEvent.changeText(searchInput, 'Luke');
+
+        expect(screen.getByText('Luke Skywalker')).toBeTruthy();
+        expect(screen.queryByText('Darth Vader')).toBeNull();
     });
 });
