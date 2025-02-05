@@ -3,36 +3,30 @@ import { render } from '@testing-library/react-native';
 import App from '../App';
 
 describe('App', () => {
-  it('renders the People tab', () => {
+  it('renders correctly', () => {
+    const { toJSON } = render(<App />);
+    expect(toJSON()).toMatchSnapshot();
+  });
+
+  it('has three tabs', () => {
     const { getByText } = render(<App />);
     expect(getByText('People')).toBeTruthy();
-  });
-
-  it('renders the Planets tab', () => {
-    const { getByText } = render(<App />);
     expect(getByText('Planets')).toBeTruthy();
-  });
-
-  it('renders the Spaceships tab', () => {
-    const { getByText } = render(<App />);
     expect(getByText('Spaceships')).toBeTruthy();
   });
 
-  it('renders the correct icon for the People tab', () => {
+  it('renders People tab icon', () => {
     const { getByTestId } = render(<App />);
-    const peopleIcon = getByTestId('People-icon');
-    expect(peopleIcon).toBeTruthy();
+    expect(getByTestId('People-icon')).toBeTruthy();
   });
 
-  it('renders the correct icon for the Planets tab', () => {
+  it('renders Planets tab icon', () => {
     const { getByTestId } = render(<App />);
-    const planetsIcon = getByTestId('Planets-icon');
-    expect(planetsIcon).toBeTruthy();
+    expect(getByTestId('Planets-icon')).toBeTruthy();
   });
 
-  it('renders the correct icon for the Spaceships tab', () => {
+  it('renders Spaceships tab icon', () => {
     const { getByTestId } = render(<App />);
-    const spaceshipsIcon = getByTestId('Spaceships-icon');
-    expect(spaceshipsIcon).toBeTruthy();
+    expect(getByTestId('Spaceships-icon')).toBeTruthy();
   });
 });

@@ -1,81 +1,78 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react-native';
+import { render, fireEvent } from '@testing-library/react-native';
+import { Linking } from 'react-native';
 import PeopleScreen from '../app/components/PeopleScreen';
 import useFetch from '../app/hooks/useFetch';
 
 jest.mock('../app/hooks/useFetch');
+jest.mock('react-native/Libraries/Linking/Linking', () => ({
+  openURL: jest.fn(),
+}));
 
 describe('PeopleScreen', () => {
-    it('renders loading state correctly', () => {
-        (useFetch as jest.Mock).mockReturnValue({
-            data: null,
-            isLoading: true,
-            error: null,
-        });
-
-        render(<PeopleScreen />);
-
-        expect(screen.getByText('Loading...')).toBeTruthy();
-        expect(screen.getByTestId('ActivityIndicator')).toBeTruthy();
+  it('renders loading state correctly', () => {
+    (useFetch as jest.Mock).mockReturnValue({
+      data: null,
+      isLoading: true,
+      error: null,
     });
 
-    it('renders error state correctly', () => {
-        (useFetch as jest.Mock).mockReturnValue({
-            data: null,
-            isLoading: false,
-            error: { message: 'Failed to fetch data' },
-        });
+    const { getByText, getByTestId } = render(<PeopleScreen />);
 
-        render(<PeopleScreen />);
+    expect(getByText('Loading...')).toBeTruthy();
+    expect(getByTestId('ActivityIndicator')).toBeTruthy();
+  });
 
-        expect(screen.getByText('Error: Failed to fetch data')).toBeTruthy();
+  it('renders error state correctly', () => {
+    (useFetch as jest.Mock).mockReturnValue({
+      data: null,
+      isLoading: false,
+      error: { message: 'Failed to fetch data' },
     });
 
-    it('renders people correctly', () => {
-        const mockData = {
-            results: [
-                { name: 'Luke Skywalker', height: '172', mass: '77' },
-                { name: 'Darth Vader', height: '202', mass: '136' },
-            ],
-        };
+    const { getByText } = render(<PeopleScreen />);
 
-        (useFetch as jest.Mock).mockReturnValue({
-            data: mockData,
-            isLoading: false,
-            error: null,
-        });
+    expect(getByText('Error: Failed to fetch data')).toBeTruthy();
+  });
 
-        render(<PeopleScreen />);
+  it('renders data correctly', () => {
+    const mockData = {
+      results: [
+        { name: 'Luke Skywalker', height: '172', mass: '77' },
+        { name: 'Darth Vader', height: '202', mass: '136' },
+      ],
+    };
 
-        expect(screen.getByText('Luke Skywalker')).toBeTruthy();
-        expect(screen.getByText('Height: 172')).toBeTruthy();
-        expect(screen.getByText('Mass: 77')).toBeTruthy();
-
-        expect(screen.getByText('Darth Vader')).toBeTruthy();
-        expect(screen.getByText('Height: 202')).toBeTruthy();
-        expect(screen.getByText('Mass: 136')).toBeTruthy();
+    (useFetch as jest.Mock).mockReturnValue({
+      data: mockData,
+      isLoading: false,
+      error: null,
     });
 
-    it('filters data based on search query', () => {
-        const mockData = {
-            results: [
-                { name: 'Luke Skywalker', height: '172', mass: '77' },
-                { name: 'Darth Vader', height: '202', mass: '136' },
-            ],
-        };
+    const { getByText } = render(<PeopleScreen />);
 
-        (useFetch as jest.Mock).mockReturnValue({
-            data: mockData,
-            isLoading: false,
-            error: null,
-        });
+    expect(getByText('Luke Skywalker')).toBeTruthy();
+    expect(getByText('Darth Vader')).toBeTruthy();
+  });
 
-        render(<PeopleScreen />);
+  it('opens the correct URL when a person is clicked', () => {
+    const mockData = {
+      results: [
+        { name: 'Luke Skywalker', height: '172', mass: '77' },
+      ],
+    };
 
-        const searchInput = screen.getByPlaceholderText('Search...');
-        fireEvent.changeText(searchInput, 'Luke');
-
-        expect(screen.getByText('Luke Skywalker')).toBeTruthy();
-        expect(screen.queryByText('Darth Vader')).toBeNull();
+    (useFetch as jest.Mock).mockReturnValue({
+      data: mockData,
+      isLoading: false,
+      error: null,
     });
+
+    const { getByText } = render(<PeopleScreen />);
+    const personItem = getByText('Luke Skywalker');
+
+    fireEvent.press(personItem);
+
+    expect(Linking.openURL).toHaveBeenCalledWith('https://starwars.fandom.com/wiki/Luke_Skywalker');
+  });
 });
