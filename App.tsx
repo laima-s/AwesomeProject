@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StatusBar } from 'react-native';
+import { Image, ImageSourcePropType, StatusBar } from 'react-native';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -28,7 +28,7 @@ const App = () => {
         <Tab.Navigator
           screenOptions={({ route }) => ({
             tabBarIcon: ({ color, size }) => {
-              let iconSource: any;
+              let iconSource: ImageSourcePropType;
               let testID: string = '';
 
               if (route.name === 'People') {
