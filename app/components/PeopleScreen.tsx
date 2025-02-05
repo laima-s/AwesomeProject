@@ -1,15 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import DataScreen from '../screen/DataScreen';
 import { Person } from '../types';
 
-const renderItem = ({ item }: { item: Person }) => (
-  <View style={styles.itemContainer}>
-    <Text style={styles.itemName}>{item.name}</Text>
-    <Text style={styles.itemDetail}>Height: <Text style={styles.itemDetailValue}>{item.height}</Text></Text>
-    <Text style={styles.itemDetail}>Mass: <Text style={styles.itemDetailValue}>{item.mass}</Text></Text>
-  </View>
-);
+const renderItem = ({ item }: { item: Person }) => {
+  const handlePress = () => {
+    const url = `https://starwars.fandom.com/wiki/${item.name.replace(' ', '_')}`;
+    Linking.openURL(url);
+  };
+
+  return (
+    <TouchableOpacity onPress={handlePress} style={styles.itemContainer}>
+      <Text style={styles.itemName}>{item.name}</Text>
+      <Text style={styles.itemDetail}>Height: <Text style={styles.itemDetailValue}>{item.height}</Text></Text>
+      <Text style={styles.itemDetail}>Mass: <Text style={styles.itemDetailValue}>{item.mass}</Text></Text>
+    </TouchableOpacity>
+  );
+};
 
 const PeopleScreen = () => {
   return (
@@ -19,8 +26,8 @@ const PeopleScreen = () => {
       backgroundImage={require('../assets/images/starwars-background.jpg')}
     />
   );
-}
-  
+};
+
 const styles = StyleSheet.create({
   itemContainer: {
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
