@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import DataScreen from '../screen/DataScreen';
-import { Spaceship } from '../types';
+import { Starship } from '../types';
 
-const renderItem = ({ item }: { item: Spaceship }) => (
+const renderItem = ({ item }: { item: Starship }) => (
   <View style={styles.itemContainer}>
     <Text style={styles.itemName}>{item.name}</Text>
     <Text style={styles.itemDetail}>Model: <Text style={styles.itemDetailValue}>{item.model}</Text></Text>

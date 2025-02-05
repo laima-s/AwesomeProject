@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet, ActivityIndicator, TextInput, ImageBackground, ImageSourcePropType } from 'react-native';
 import useFetch from '../hooks/useFetch';
-import { Person, Spaceship, Planet } from '../types';
+import { Person, Starship, Planet } from '../types';
 
 interface DataScreenProps<T> {
   endpoint: string;
@@ -9,7 +9,7 @@ interface DataScreenProps<T> {
   backgroundImage?: ImageSourcePropType;
 }
 
-const DataScreen = <T extends Person | Spaceship | Planet>({ endpoint, renderItem, backgroundImage }: DataScreenProps<T>) => {
+const DataScreen = <T extends Person | Starship | Planet>({ endpoint, renderItem, backgroundImage }: DataScreenProps<T>) => {
   const { data, isLoading, error } = useFetch<T>(endpoint);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -28,7 +28,9 @@ const DataScreen = <T extends Person | Spaceship | Planet>({ endpoint, renderIte
     return (
       <ImageBackground source={backgroundImage} style={styles.background}>
         <View style={styles.container}>
-          <Text style={styles.errorText}>Error: {error.message}</Text>
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>Error: {error.message}</Text>
+          </View>
         </View>
       </ImageBackground>
     );
@@ -79,7 +81,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   errorContainer: {
-    backgroundColor: 'rgba(255, 0, 187, 0.7)',
+    backgroundColor: 'rgba(255, 0, 0, 0.7)',
     padding: 15,
     borderRadius: 10,
     borderWidth: 1,
@@ -88,19 +90,19 @@ const styles = StyleSheet.create({
   errorText: {
     fontFamily: 'Starjout',
     fontSize: 18,
-    color: 'pink',
+    color: 'white',
     textAlign: 'center',
   },
   searchInput: {
     fontFamily: 'Starjout',
     fontSize: 18,
     borderWidth: 2,
+    borderRadius: 5,
     borderColor: 'yellow',
-    borderRadius: 8,
     paddingHorizontal: 10,
-    marginBottom: 40,
+    marginBottom: 20,
     width: '100%',
-    color: 'black',
+    color: 'yellow',
     backgroundColor: 'lightyellow',
     textAlign: 'left',
   },

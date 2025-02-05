@@ -29,7 +29,7 @@ const App = () => {
           screenOptions={({ route }) => ({
             tabBarIcon: ({ color, size }) => {
               let iconSource: any;
-              let testID: string;
+              let testID: string = '';
 
               if (route.name === 'People') {
                 iconSource = require('./app/assets/images/people-icon.png');
