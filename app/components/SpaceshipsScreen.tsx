@@ -1,20 +1,27 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 import DataScreen from '../screen/DataScreen';
 import { Starship } from '../types';
 
-const renderItem = ({ item }: { item: Starship }) => (
-  <View style={styles.itemContainer}>
-    <Text style={styles.itemName}>{item.name}</Text>
-    <Text style={styles.itemDetail}>Model: <Text style={styles.itemDetailValue}>{item.model}</Text></Text>
-    <Text style={styles.itemDetail}>Manufacturer: <Text style={styles.itemDetailValue}>{item.manufacturer}</Text></Text>
-  </View>
-);
+const renderItem = ({ item }: { item: Starship }) => {
+  const handlePress = () => {
+    const url = `https://starwars.fandom.com/wiki/${item.name.replace(' ', '_')}`;
+    Linking.openURL(url);
+  };
+
+  return (
+    <TouchableOpacity onPress={handlePress} style={styles.itemContainer}>
+      <Text style={styles.itemName}>{item.name}</Text>
+      <Text style={styles.itemDetail}>Model: <Text style={styles.itemDetailValue}>{item.model}</Text></Text>
+      <Text style={styles.itemDetail}>Manufacturer: <Text style={styles.itemDetailValue}>{item.manufacturer}</Text></Text>
+    </TouchableOpacity>
+  );
+};
 
 const SpaceshipsScreen = () => {
   return (
     <DataScreen
-      endpoint="spaceships"
+      endpoint="starships"
       renderItem={renderItem}
       backgroundImage={require('../assets/images/starwars-background.jpg')}
     />

@@ -40,6 +40,8 @@ const App = () => {
               } else if (route.name === 'Spaceships') {
                 iconSource = require('./app/assets/images/spaceship_icon.png');
                 testID = 'Spaceships-icon';
+              } else {
+                iconSource = require('./app/assets/images/people-icon.png');
               }
               
               return <Image source={iconSource} style={{ width: size, height: size, tintColor: color }} testID={testID} />;
